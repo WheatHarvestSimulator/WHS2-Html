@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>wheatharvest</title>
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<style>
+body.sansserif {
+	  font-family: Arial, Helvetica, sans-serif;
+}
+body {
+	background-color: lightblue;
+}
+.right {
+	float: right;
+}
+.left {
+	float: left;
+}
+</style>
+<body class="sansserif">
+<h1 id="wheat-harvest-sim-2">Wheat Harvest Sim 2</h1>
+<h2 id="character-creation">Character Creation</h2>
+<p>Stats are as follows:</p>
+<ol type="1">
+<li><p>Speed</p>
+<p><em>Governs movement, intiative, and dodge chance.</em></p></li>
+<li><p>Power</p>
+<p><em>Your physical strength and ability to deal damage with weapons.</em></p></li>
+<li><p>Charisma</p>
+<p><em>Your ability to speak to people and be listened to.</em></p></li>
+<li><p>Intelligence</p>
+<p><em>Equal to magic points per day, and reflects your general intelligence. Arcane Magic comes from intellgience.</em></p></li>
+<li><p>Endurance</p>
+<p><em>Your health.</em></p></li>
+<li><p>6th Sense</p>
+<p><em>Your almost unnatural intuition. Death Magic, Shadow Magic, and magic based on detection comes from your 6th Sense.</em></p></li>
+</ol>
+<h3 id="generating-stats">Generating Stats</h3>
+<p>Players have the option of assigning each stat with either:</p>
+<ul>
+<li>25, 30, 30, 35, 40, 45</li>
+</ul>
+<p>Or</p>
+<ul>
+<li>10, 20, 30, 40, 50, 60</li>
+</ul>
+<h3 id="skills">Skills</h3>
+<p>Pick 8 skills for your character. These can be combat related, magic related, or anything at all. Skills are based on percentages: of the 8 skills selected, choose 4 to start with 30%. The remaining skills will start at 15%.</p>
+<h2 id="leveling">Leveling</h2>
+<p>When a character gains a level</p>
+<ol type="1">
+<li>5 points are given to distribute to Stats</li>
+<li>16 points are given to distribute to Skills, with a max addition of 10% to any one skill</li>
+</ol>
+<h2 id="combat">Combat</h2>
+<p>Initiative = Speed <br>
+<em>If speeds are tied, flip a coin to decide order</em></p>
+<p>Endurance = Health</P><br> 
+<em>Permanent damage to Endurance occurs at 0 points </em><br>
+<em>Death occurs at -20 points</em>
+<h3 id="attacking">Attacking:</h3>
+<p>Roll one D20 and add the percentage of the combat skill</p>
+<p>Example:</p>
+<p><em>A 30% long blade skill adds +3 to hit</em></p>
+<h3 id="dodgingarmor">Dodging/Armor</h3>
+<p>Dodge = 10 + SPEED/10</p>
+<h4 id="armor">Armor:</h4>
+<ol type="1">
+<li>NONE = -0 TO SPEED</li>
+<li>LIGHT = -10 TO SPEED</li>
+<li>MED = -20 TO SPEED</li>
+<li>HEAVY = -30 TO SPEED</li>
+</ol>
+<p><em>If the character has armor AND no shield, subtract an additional -5 to SPEED</em></p>
+<h3 id="damage">Damage</h3>
+<p>Damage = POWER/10 + 1 point for every 20% of the weapon skill +</p>
+<table>
+<thead>
+<tr class="header">
+<th>DAMAGE</th>
+<th>ARMOR TYPE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>D20</td>
+<td>NONE</td>
+</tr>
+<tr class="even">
+<td>D10</td>
+<td>LIGHT</td>
+</tr>
+<tr class="odd">
+<td>D8</td>
+<td>MED</td>
+</tr>
+<tr class="even">
+<td>D6</td>
+<td>HEAVY</td>
+</tr>
+</tbody>
+</table>
+<h4>Special Attacks</h4>
+<p>If SPEED &gt; 60, then attack twice, the second roll will be the next roll in the table</p>
+<p>Example:</p>
+<p><em>The oppenent is wearing light armor, and you hit. Roll 1D10 and 1D8 for damage</em></p>
+<p>If the character is wearing Heavy armor, roll an additional D6</p>
+<p>If Duel Wielding or using a Two Handed weapon, attack twice regardless of speed, using the same descending order</p>
+<p><em>If SPEED &gt; 60 AND duel wielding/two handed, roll the same die twice</em></p>
+<p>Grappling:</p>
+<p>Check = (POWER+SPEED)/10 + D10</p>
+<p>Both characters do the check and the higher number determines who wins the attempt</p>
+<h2 id="actions">Actions</h2>
+<p>Roll D20 + %Skill</p>
+<p>If you have 2 or more skills that affect the same thing (e.g. battleaxes and two-handed weapons) the higher skill is the one applied.</p>
+<p>When attempting an action without a corresponding skill, instead use its corresponding core stat divided by 20.</p>
+<p>This table outlines the basic spectrum of checks</p>
+<table>
+<thead>
+<tr class="header">
+<th>Difficulty</th>
+<th>Check</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>EASY</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>MED</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td>HARD</td>
+<td>15</td>
+</tr>
+<tr class="even">
+<td>MIRACLE</td>
+<td>20</td>
+</tr>
+</tbody>
+</table>
+<h2 id="magic">Magic</h2>
+<p>MP = INTELLIGENCE, points are per day</p>
+<p>Cost Table</p>
+<table>
+<thead>
+<tr class="header">
+<th>Difficulty</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>VERY EASY</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>EASY</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td>MED</td>
+<td>20</td>
+</tr>
+<tr class="even">
+<td>HARD</td>
+<td>30</td>
+</tr>
+</tbody>
+</table>
+<p>For all casting, whether it be in combat or not, the check is encompassed in one roll and the damage is simply the roll itself unless specified by the spell.</p>
+<p>Spell Difficulty vs. 1D10 + INTELLIGENCE/10</p>
+<p><em>spell difficulty is gauged the same way as actions</em></p>
+<p>Skills specializing in certain types of magic are also added to the cast check in the same way as any other skill check</p>
+<p>Characters start with 2 spells and gain 1 per level. There is no limit to the number of spells acquired and can be learned from outside sources such as teachers and spell shops.</p>
+<h2 id="equipment">Equipment</h2>
+<p>Carrying capacity = POWER + ENDURANCE + 20</p>
+<h1 >CHARACTER SHEET</h1>
+<div class="left">
+<form>
+	NAME:<br>
+	<input type="text">
+	<br>      <br>        
+	SPEED:<br>
+	<input type="number" id="speed" value="value">
+	<br>
+	POWER:<br>
+        <input type="number" id="power" value="value">
+	<br>
+	CHARISMA:<br>
+	<input type="number" id="charisma">
+	<br>
+	INTELLIGENCE:<br>
+	<input type="number" id="intelligence" value="value">
+	<br>
+	ENDURANCE:<br>
+	<input type="number" id="endurance" value="value">
+	<br>
+	6th SENSE:<br>
+	<input type="number">
+	<br><br>
+</form>
+</div>
+<div class = "right">
+	<form>
+	SKILLS<br>
+	<input type="text">	<input type="number">
+        <br>
+<input type="text">	<input type="number">
+<br>
+<input type="text">	<input type="number">
+<br>
+<input type="text">	<input type="number">
+<br>
+<input type="text">	<input type="number">
+<br>
+<input type="text">	<input type="number">
+<br>
+<input type="text">	<input type="number">
+<br>
+
+<input type="text">	<input type="number">
+<br>
+<br>
+SPELLS<br>
+<input type="text">
+<br>
+<input type="text">
+<br>
+<input type="text">
+<br>
+<input type="text">
+<br>
+<input type="text">
+<br>
+
+</form>
+</div>
+<script>
+function myFunction() {
+  var x = parseFloat(document.getElementById("power").value);
+var y= parseFloat(document.getElementById("endurance").value);
+   
+carCap= x+y+20;
+	document.getElementById("carCap").innerHTML = carCap;
+	      }
+function getCheckedRadioValue(name){
+	var armors = document.getElementsByName(name);
+	for (var i=0, len=armors.length; i<len; ++i)
+		if (armors[i].checked) return armors[i].value;
+	}	
+function dodgeCalc(){
+	
+	var speed= parseFloat(document.getElementById("speed").value);
+	var armorType= getCheckedRadioValue("armor");
+	switch(armorType){
+		case "Light":
+			speed-=10;
+			break;
+		case "Medium":
+			speed-=20;
+			break;
+		case "Heavy":
+			speed-=30;
+			break;
+
+	}
+	
+	document.getElementById("dodge").innerHTML =10+(speed/10);
+	return speed;
+}
+function getHealth(){
+	document.getElementById("health").innerHTML=parseFloat(document.getElementById("endurance").value);}
+function getMP(){
+	document.getElementById("mp").innerHTML=parseFloat(document.getElementById("intelligence").value);}
+function setHealth(num){
+	document.getElementById("health").innerHTML-=num;}
+function setMP(num){
+	document.getElementById("mp").innerHTML-=num;}
+</script>
+
+<br>
+
+<br>
+
+<p><b>HEALTH</b>:
+<object id="health"></object></p>
+<button onclick="getHealth()">Reset Health</button>
+<form>
+	<input type="number" id="healthMod" value="value">
+</form>
+<button onclick = "setHealth(-document.getElementById('healthMod').value); document.getElementById('healthMod').value = ''">+HP</button>
+<button onclick = "setHealth(document.getElementById('healthMod').value);document.getElementById('healthMod').value = ''">-HP</button>
+<br>
+<br>
+<br>
+
+<b>MP:</b>
+<object id="mp"></object></p>
+<button onclick="getMP()">Reset MP</button>
+<br>
+<form>
+	<input type="number" id="mpMod" value="value">
+</form>
+<button onclick = "setMP(-document.getElementById('mpMod').value);document.getElementById('mpMod').value = ''">+MP</button>
+<button onclick = "setMP(document.getElementById('mpMod').value);document.getElementById('mpMod').value = ''">-MP</button>
+
+
+<div>
+<br>
+<br>
+<button onclick="myFunction()">Calculate Carrying Capacity</button>
+<p><b>CARRYING CAPACITY:</b>
+<object id="carCap"></object></p>
+<br>
+<button onclick="dodgeCalc()">Calculate Dodge Stat</button>
+<p><b>DODGE STAT:</b>
+<object id="dodge">
+</object></p>
+</div>
+<p>ARMOR</p>
+<form>
+	<div>
+	<input name="armor" type="radio" id="armor" value="None" >None<br>
+	<input name="armor"type="radio" id="armor" value="Light">Light<br>
+	<input name="armor"type="radio" id="armor" value="Medium">Medium<br>
+	<input name="armor"type="radio" id="armor" value="Heavy">Heavy<br>
+	</div>
+</form>
+<div>
+Equipment
+<br>
+<textarea>
+</textarea>
+</div>
+</body>
+</html>
