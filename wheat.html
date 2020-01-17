@@ -206,26 +206,34 @@ body {
 <form>
 	NAME:<br>
 	<input type="text">
-	<br>      <br>        
+	<br>      <br>      
 	SPEED:<br>
-	<input type="number" id="speed" value="value">
-	<br>
+	<input type="number" id="speedbase" value="value">
+        <p><b>Effective:</b>
+        <object id="speed"></object></p>
 	POWER:<br>
-        <input type="number" id="power" value="value">
-	<br>
+        <input type="number" id="powerbase" value="value">
+            <p><b>Effective:</b>
+            <object id="power"></object></p>
 	CHARISMA:<br>
-	<input type="number" id="charisma">
-	<br>
+	<input type="number" id="charismabase">
+        <p><b>Effective:</b>
+        <object id="charisma"></object></p>
 	INTELLIGENCE:<br>
-	<input type="number" id="intelligence" value="value">
-	<br>
+	<input type="number" id="intelligencebase" value="value">
+        <p><b>Effective:</b>
+        <object id="intelligence"></object></p>
 	ENDURANCE:<br>
-	<input type="number" id="endurance" value="value">
-	<br>
+	<input type="number" id="endurancebase" value="value">
+        <p><b>Effective:</b>
+        <object id="endurance"></object></p>
 	6th SENSE:<br>
-	<input type="number">
-	<br><br>
+	<input type="number" id="sixbase">
+        <p><b>Effective:</b>
+        <object id="sixth"></object></p>
+    <br>
 </form>
+<button onclick="calcStats()">Calculate effective stats</button>
 </div>
 <div class = "right">
 	<form>
@@ -264,13 +272,76 @@ SPELLS<br>
 </form>
 </div>
 <script>
-function myFunction() {
-  var x = parseFloat(document.getElementById("power").value);
-var y= parseFloat(document.getElementById("endurance").value);
+function calcStats(){
+    calcSpeed();
+    calcPower();
+    calcCharisma();
+    calcIntelligence();
+    calcEndurance();
+    calcSixthSense();
+    dodgeCalc();
+    calcCarryCap();
+    return;
+}
+
+function calcSpeed() {
+    var speed = document.getElementById("speedbase").value;
+    speed = speedArmor(speed);
+    //apply debuffs or buffs
+    //apply racials
+    document.getElementById("speed").innerHTML = speed;
+    return;
+}
+
+function calcPower() {
+    var power = document.getElementById("powerbase").value;
+    //apply debuffs or buffs
+    //apply racials
+    document.getElementById("power").innerHTML = power;
+    return;
+}
+
+function calcCharisma() {
+    var charisma = document.getElementById("charismabase").value;
+    //apply debuffs or buffs
+    //apply racials
+    document.getElementById("charisma").innerHTML = charisma;
+    return;
+}
+
+function calcIntelligence() {
+    var intelligence = document.getElementById("intelligencebase").value;
+    //apply debuffs or buffs
+    //apply racials
+    document.getElementById("intelligence").innerHTML = intelligence;
+    return;
+}
+
+function calcEndurance() {
+    var endurance = document.getElementById("endurancebase").value;
+    //apply debuffs or buffs
+    //apply racials
+    document.getElementById("endurance").innerHTML = endurance;
+    return;
+}
+
+function calcSixthSense() {
+    var sixth = document.getElementById("sixbase").value;
+    //apply debuffs or buffs
+    //apply racials
+    document.getElementById("sixth").innerHTML = sixth;
+    return;
+}
+
+function calcCarryCap() {
+    var power = parseFloat(document.getElementById("power").innerHTML);
+    var endurance = parseFloat(document.getElementById("endurance").innerHTML);
    
-carCap= x+y+20;
+    var carCap= (20+power+endurance);
 	document.getElementById("carCap").innerHTML = carCap;
-	      }
+	return;
+}
+
 function getCheckedRadioValue(name){
 	var armors = document.getElementsByName(name);
 	for (var i=0, len=armors.length; i<len; ++i)
@@ -284,9 +355,9 @@ function checkShield() {
     return 0;
     }
 }
-function dodgeCalc(){
-	
-	var speed= parseFloat(document.getElementById("speed").value);
+
+function speedArmor(speedin){
+    var speed = speedin;
 	var armorType= getCheckedRadioValue("armor");
 	switch(armorType){
 		case "Light":
@@ -300,16 +371,20 @@ function dodgeCalc(){
 			speed-=30;
 			if (!checkShield()) {speed -=5;}
 			break;
-
-	}
-	
+    }
+    return speed;
+    }
+    
+function dodgeCalc(){
+    var speed = document.getElementById("speed").innerHTML;
 	document.getElementById("dodge").innerHTML =10+(speed/10);
-	return speed;
+	return;
 }
+
 function getHealth(){
-	document.getElementById("health").innerHTML=parseFloat(document.getElementById("endurance").value);}
+	document.getElementById("health").innerHTML=document.getElementById("endurance").innerHTML;}
 function getMP(){
-	document.getElementById("mp").innerHTML=parseFloat(document.getElementById("intelligence").value);}
+	document.getElementById("mp").innerHTML=document.getElementById("intelligence").innerHTML;}
 function setHealth(num){
 	document.getElementById("health").innerHTML-=num;}
 function setMP(num){
@@ -346,11 +421,9 @@ function setMP(num){
 <div>
 <br>
 <br>
-<button onclick="myFunction()">Calculate Carrying Capacity</button>
 <p><b>CARRYING CAPACITY:</b>
 <object id="carCap"></object></p>
 <br>
-<button onclick="dodgeCalc()">Calculate Dodge Stat</button>
 <p><b>DODGE STAT:</b>
 <object id="dodge">
 </object></p>
