@@ -31,7 +31,13 @@ body {
 </style>
 <body class="sansserif">
 <h1 id="wheat-harvest-sim-2">Wheat Harvest Sim 2</h1>
+<p>Important Places:<br />
+<a href="#charactersheet">Character Sheet</a> <br />
+<a href="#combat">Combat Rules</a> <br />
+<a href="#magic">Magic Rules</a> <br />
+</p>
 <h2 id="character-creation">Character Creation</h2>
+<a href="#wheat-harvest-sim-2">Top</a>
 <p>Stats are as follows:</p>
 <ol type="1">
 <li><p>Speed</p>
@@ -41,7 +47,7 @@ body {
 <li><p>Charisma</p>
 <p><em>Your ability to speak to people and be listened to.</em></p></li>
 <li><p>Intelligence</p>
-<p><em>Equal to magic points per day, and reflects your general intelligence. Arcane Magic comes from intellgience.</em></p></li>
+<p><em>Equal to magic points per day, and reflects your general intelligence. Arcane Magic comes from intelligence.</em></p></li>
 <li><p>Endurance</p>
 <p><em>Your health.</em></p></li>
 <li><p>6th Sense</p>
@@ -65,6 +71,7 @@ body {
 <li>16 points are given to distribute to Skills, with a max addition of 10% to any one skill</li>
 </ol>
 <h2 id="combat">Combat</h2>
+<a href="#wheat-harvest-sim-2">Top</a>
 <p>Initiative = Speed <br>
 <em>If speeds are tied, flip a coin to decide order</em></p>
 <p>Endurance = Health</P><br> 
@@ -83,7 +90,7 @@ body {
 <li>MED = -20 TO SPEED</li>
 <li>HEAVY = -30 TO SPEED</li>
 </ol>
-<p><em>If the character has armor AND no shield, subtract an additional -5 to SPEED</em></p>
+<p><em>Characters in medium or heavy armor without using a shield gain an additional -5 penalty to dodge chance.</em></p>
 <h3 id="damage">Damage</h3>
 <p>Damage = POWER/10 + 1 point for every 20% of the weapon skill +</p>
 <table>
@@ -115,7 +122,7 @@ body {
 <h4>Special Attacks</h4>
 <p>If SPEED &gt; 60, then attack twice, the second roll will be the next roll in the table</p>
 <p>Example:</p>
-<p><em>The oppenent is wearing light armor, and you hit. Roll 1D10 and 1D8 for damage</em></p>
+<p><em>The opponent is wearing light armor, and you hit. Roll 1D10 and 1D8 for damage</em></p>
 <p>If the character is wearing Heavy armor, roll an additional D6</p>
 <p>If Duel Wielding or using a Two Handed weapon, attack twice regardless of speed, using the same descending order</p>
 <p><em>If SPEED &gt; 60 AND duel wielding/two handed, roll the same die twice</em></p>
@@ -154,7 +161,9 @@ body {
 </tbody>
 </table>
 <h2 id="magic">Magic</h2>
-<p>MP = INTELLIGENCE, points are per day</p>
+<a href="#wheat-harvest-sim-2">Top</a>
+<p>Your maximum MP is equal to your Intelligence, and your MP is set to maximum after you rest.</p>
+<p>Taking a short break without committing to a full night's sleep restores a maximum of (Intelligence/4) MP, but only once between full rests.</p>
 <p>Cost Table</p>
 <table>
 <thead>
@@ -182,14 +191,17 @@ body {
 </tr>
 </tbody>
 </table>
-<p>For all casting, whether it be in combat or not, the check is encompassed in one roll and the damage is simply the roll itself unless specified by the spell.</p>
-<p>Spell Difficulty vs. 1D10 + INTELLIGENCE/10</p>
-<p><em>spell difficulty is gauged the same way as actions</em></p>
-<p>Skills specializing in certain types of magic are also added to the cast check in the same way as any other skill check</p>
-<p>Characters start with 2 spells and gain 1 per level. There is no limit to the number of spells acquired and can be learned from outside sources such as teachers and spell shops.</p>
+<p>Casting a spell is an action, like any other. Most spells are marked with their cost (MP) and their difficulty (see table). Some spells are <b> rituals</b>, which have no MP cost but take a long time to cast.</p>
+<p>Skills specializing in certain types of magic are also added to the cast check in the same way as any other skill check. When a spell asks for (YOUR ROLL), it means 1d20+(Skill modifier of that school).</p>
 <h2 id="equipment">Equipment</h2>
 <p>Carrying capacity = POWER + ENDURANCE + 20</p>
-<h1 >CHARACTER SHEET</h1>
+<h1 id = "charactersheet">CHARACTER SHEET</h1>
+<p>Jump to:<br />
+<a href="#wheat-harvest-sim-2">Top</a> <br />
+<a href="#character-creation">Character Creation</a> <br />
+<a href="#combat">Combat Rules</a> <br />
+<a href="#magic">Magic Rules</a> <br />
+</p>
 <div class="left">
 <form>
 	NAME:<br>
@@ -236,6 +248,7 @@ body {
 <input type="text">	<input type="number">
 <br>
 <br>
+
 SPELLS<br>
 <input type="text">
 <br>
@@ -263,6 +276,14 @@ function getCheckedRadioValue(name){
 	for (var i=0, len=armors.length; i<len; ++i)
 		if (armors[i].checked) return armors[i].value;
 	}	
+function checkShield() {
+    if (document.getElementById("Shielded").checked) {
+    return 1;
+    }
+    else {
+    return 0;
+    }
+}
 function dodgeCalc(){
 	
 	var speed= parseFloat(document.getElementById("speed").value);
@@ -273,9 +294,11 @@ function dodgeCalc(){
 			break;
 		case "Medium":
 			speed-=20;
+			if (!checkShield()) {speed -= 5;}
 			break;
 		case "Heavy":
 			speed-=30;
+			if (!checkShield()) {speed -=5;}
 			break;
 
 	}
@@ -341,7 +364,11 @@ function setMP(num){
 	<input name="armor"type="radio" id="armor" value="Heavy">Heavy<br>
 	</div>
 </form>
+<form>
+    <div>
+    <input type="checkbox" name="Shield" value="1" id="Shielded"> Wielding a shield<br>
 <div>
+</form>
 Equipment
 <br>
 <textarea>
