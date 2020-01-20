@@ -365,11 +365,9 @@ function speedArmor(speedin){
 			break;
 		case "Medium":
 			speed-=20;
-			if (!checkShield()) {speed -= 5;}
 			break;
 		case "Heavy":
 			speed-=30;
-			if (!checkShield()) {speed -=5;}
 			break;
     }
     return speed;
@@ -377,6 +375,7 @@ function speedArmor(speedin){
     
 function dodgeCalc(){
     var speed = document.getElementById("speed").innerHTML;
+    if (!checkShield()) {speed -= 5;}
 	document.getElementById("dodge").innerHTML =10+(speed/10);
 	return;
 }
