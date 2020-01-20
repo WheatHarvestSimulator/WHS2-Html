@@ -375,7 +375,10 @@ function speedArmor(speedin){
     
 function dodgeCalc(){
     var speed = document.getElementById("speed").innerHTML;
-    if (!checkShield()) {speed -= 5;}
+    var armorType = getCheckedRadioValue("armor");
+    if ((armorType == "Medium") || (armorType == "Heavy")){
+        if (!checkShield()) {speed -= 5;}
+    }
 	document.getElementById("dodge").innerHTML =10+(speed/10);
 	return;
 }
@@ -415,7 +418,6 @@ function setMP(num){
 </form>
 <button onclick = "setMP(-document.getElementById('mpMod').value);document.getElementById('mpMod').value = ''">+MP</button>
 <button onclick = "setMP(document.getElementById('mpMod').value);document.getElementById('mpMod').value = ''">-MP</button>
-
 
 <div>
 <br>
