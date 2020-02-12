@@ -164,7 +164,6 @@ body {
 <a href="#wheat-harvest-sim-2">Top</a>
 <p>Your maximum MP is equal to your Intelligence, and your MP is set to maximum after you rest.</p>
 <p>Taking a short break without committing to a full night's sleep restores a maximum of (Intelligence/4) MP, but only once between full rests.</p>
-<p>Cost Table</p>
 <table>
 <thead>
 <tr class="header">
@@ -214,33 +213,35 @@ body {
 	<br>      <br>      
 	SPEED:<br>
 	<input type="number" id="speedbase" value="value">
-        <p><b>Effective:</b>
-        <object id="speed"></object></p>
+	</br>
 	POWER:<br>
         <input type="number" id="powerbase" value="value">
-            <p><b>Effective:</b>
-            <object id="power"></object></p>
+        </br>
 	CHARISMA:<br>
 	<input type="number" id="charismabase">
-        <p><b>Effective:</b>
-        <object id="charisma"></object></p>
+    </br>
 	INTELLIGENCE:<br>
 	<input type="number" id="intelligencebase" value="value">
-        <p><b>Effective:</b>
-        <object id="intelligence"></object></p>
+    </br>
 	ENDURANCE:<br>
 	<input type="number" id="endurancebase" value="value">
-        <p><b>Effective:</b>
-        <object id="endurance"></object></p>
+    </br>
 	6th SENSE:<br>
 	<input type="number" id="sixbase">
-        <p><b>Effective:</b>
-        <object id="sixth"></object></p>
+    </br>
     <br>
 </form>
 <button onclick="calcStats()">Calculate effective stats</button>
 </div>
+
 <div class = "right">
+<p><b>Effective Stats</b></p>
+<p><b>SPEED: </b><object id="speed"></object></p>
+<p><b>POWER: </b><object id="power"></object></p>
+<p><b>CHARISMA: </b><object id="charisma"></object></p>
+<p><b>INTELLIGENCE: </b><object id="intelligence"></object></p>
+<p><b>ENDURANCE: </b><object id="endurance"></object></p>
+<p><b>6TH SENSE: </b><object id="sixth"></object></p>
 	<form>
 	SKILLS<br>
 	<input type="text">	<input type="number">
