@@ -33,6 +33,7 @@ body {
 <h1 id="wheat-harvest-sim-2">Wheat Harvest Sim 2</h1>
 <p>Important Places:<br />
 <a href="#charactersheet">Character Sheet</a> <br />
+<a href="#actions">General Rules</a> <br />
 <a href="#combat">Combat Rules</a> <br />
 <a href="#magic">Magic Rules</a> <br />
 </p>
@@ -70,6 +71,43 @@ body {
 <li>5 points are given to distribute to Stats</li>
 <li>16 points are given to distribute to Skills, with a max addition of 10% to any one skill</li>
 </ol>
+<h2 id="actions">Actions</h2>
+<a href="#wheat-harvest-sim-2">Top</a>
+<p>In Wheat Harvest Simulator 2, all gameplay including roleplay takes place inside a turn structure, during which players can perform approximately one action per turn. </p>
+<p>An action consists of doing something that requires a dice roll or would consume the in-game time allotted to one turn. Swinging a weapon, casting a spell, fleeing a pursuer, or drinking a regular-sized potion are all actions.</p>
+<p>Some things, like running a short distance, drawing an arrow from a quiver, or letting out a battle cry don't use a full action. This is why turns are <b>approximately</b> one action long - they're usually one action and some change.</p>
+<p>There is no fixed turn duration, rather, a turn's duration changes based on the pacing of the scene. A turn during combat might be 6 seconds or less, whereas a turn in a stealth or travel scene may be anywhere from 5 minutes to an hour.</p>
+<p>Characters including players take their turns in descending order of their Speed, but players with higher speed can choose to delay their turns until later in the initiative stack. For example, a nimble thief may want to use his turn to react to something a slower character does, such as interrupting a spellcaster.</p>
+<p><b>To take an action you have a skill related to,</b> roll 1d20 + (Skill/10). For instance, a thief picking a lock with a lockpicking skill of 54% would roll 1d20 and add 5.4 to the result.</p>
+<p>If you have 2 or more skills that affect the same thing (e.g. battleaxes and two-handed weapons) the higher skill is the one applied.</p>
+<p><b>When attempting an action without a corresponding skill,</b> instead use its corresponding core stat divided by 20.</p>
+<p>This table outlines the basic spectrum of checks</p>
+<table>
+<thead>
+<tr class="header">
+<th>Difficulty</th>
+<th>Check</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>EASY</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>MED</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td>HARD</td>
+<td>15</td>
+</tr>
+<tr class="even">
+<td>MIRACLE</td>
+<td>20</td>
+</tr>
+</tbody>
+</table>
 <h2 id="combat">Combat</h2>
 <a href="#wheat-harvest-sim-2">Top</a>
 <p>Initiative = Speed <br>
@@ -129,37 +167,6 @@ body {
 <p>Grappling:</p>
 <p>Check = (POWER+SPEED)/10 + D10</p>
 <p>Both characters do the check and the higher number determines who wins the attempt</p>
-<h2 id="actions">Actions</h2>
-<p>Roll D20 + %Skill</p>
-<p>If you have 2 or more skills that affect the same thing (e.g. battleaxes and two-handed weapons) the higher skill is the one applied.</p>
-<p>When attempting an action without a corresponding skill, instead use its corresponding core stat divided by 20.</p>
-<p>This table outlines the basic spectrum of checks</p>
-<table>
-<thead>
-<tr class="header">
-<th>Difficulty</th>
-<th>Check</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>EASY</td>
-<td>5</td>
-</tr>
-<tr class="even">
-<td>MED</td>
-<td>10</td>
-</tr>
-<tr class="odd">
-<td>HARD</td>
-<td>15</td>
-</tr>
-<tr class="even">
-<td>MIRACLE</td>
-<td>20</td>
-</tr>
-</tbody>
-</table>
 <h2 id="magic">Magic</h2>
 <a href="#wheat-harvest-sim-2">Top</a>
 <p>Your maximum MP is equal to your Intelligence, and your MP is set to maximum after you rest.</p>
@@ -430,7 +437,6 @@ function setMP(num){
 <br>
 <p><b>CARRYING CAPACITY:</b>
 <object id="carCap"></object></p>
-<br>
 <p><b>DODGE STAT:</b>
 <object id="dodge">
 </object></p>
