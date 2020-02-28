@@ -241,14 +241,35 @@ body {
 <button onclick="calcStats()">Calculate effective stats</button>
 </div>
 
-<div class = "right">
-<p><b>Effective Stats</b></p>
-<p><b>SPEED: </b><object id="speed"></object></p>
-<p><b>POWER: </b><object id="power"></object></p>
-<p><b>CHARISMA: </b><object id="charisma"></object></p>
-<p><b>INTELLIGENCE: </b><object id="intelligence"></object></p>
-<p><b>ENDURANCE: </b><object id="endurance"></object></p>
-<p><b>6TH SENSE: </b><object id="sixth"></object></p>
+<div class = "center">
+<div id="dvTableEffStat"></div>
+
+
+<input type="text" id="input1" placeholder="Debuff Source">
+<select id="input2">
+    <option value="Speed">Speed</option>
+    <option value="Power">Power</option>
+    <option value="Charisma">Charisma</option>
+    <option value="Intelligence">Intelligence</option>
+    <option value="Endurance">Endurance</option>
+    <option value="6thSense">6th Sense</option>
+</select>
+<input type="number" id="input3" placeholder="Status Value"/>
+
+<input type="button" value="Add Status" onclick="AddDebuff()" />
+
+<input type="number" id="whichToRemove" placeholder="Status ID">
+<input type="button" value="Remove Status" onclick="RemoveDebuff()"/>
+
+<input type="button" value="Clear All" onclick="ClearDebuffs()"/>
+
+<!-- <input type="button" value="Generate Table" onclick="GenerateTable()" /> -->
+
+<div id="dvTableDebuff"></div>
+
+</div>
+<div class="right">
+
 	<form>
 	SKILLS<br>
 	<input type="text">	<input type="number">
@@ -284,8 +305,83 @@ SPELLS<br>
 
 </form>
 </div>
-<script>
+<script type="text/javascript">
+
+var debuff = new Array();
+        debuff.push(["Status ID", "Name", "Stat", "Value"]);
+        
+let numDebuffs = 0;
+
+    function GenerateTable(array, dvTable) {
+ 
+        //Create a HTML Table element.
+        var table = document.createElement("TABLE");
+        table.border = "1";
+ 
+        //Get the count of columns.
+        var columnCount = array[0].length;
+ 
+        //Add the header row.
+        var row = table.insertRow(-1);
+        for (var i = 0; i < columnCount; i++) {
+            var headerCell = document.createElement("TH");
+            headerCell.innerHTML = array[0][i];
+            row.appendChild(headerCell);
+        }
+ 
+        //Add the data rows.
+        for (var i = 1; i < array.length; i++) {
+            row = table.insertRow(-1);
+            for (var j = 0; j < columnCount; j++) {
+                var cell = row.insertCell(-1);
+                cell.innerHTML = array[i][j];
+            }
+        }
+
+        dvTable.innerHTML = "";
+        dvTable.appendChild(table);
+    }
+    
+    function AddDebuff() {
+        debuff.push([numDebuffs+1, document.getElementById("input1").value, document.getElementById("input2").value, document.getElementById("input3").value]);
+        numDebuffs += 1;
+        GenerateTable(debuff, document.getElementById("dvTableDebuff"));
+        calcStats();
+    }
+    
+    function RemoveDebuff(){
+        var x = document.getElementById("whichToRemove").value;
+        for (RSSIterator = 1; RSSIterator < debuff.length; RSSIterator++){
+            if (debuff[RSSIterator][0] == x){
+                debuff.splice(RSSIterator, 1);
+                }
+        }
+        GenerateTable(debuff, document.getElementById("dvTableDebuff"));
+        calcStats();
+    }
+    
+    function ClearDebuffs(){
+        debuff.length = 1;
+        GenerateTable(debuff, document.getElementById("dvTableDebuff"));
+        calcStats();
+    }
+    
+    function sumStatuses(string){
+        let sum = 0;
+        for (sumIterator = 1; sumIterator<debuff.length; sumIterator++){
+            if (debuff[sumIterator][2] == string){
+                sum = sum + parseInt(debuff[sumIterator][3]);
+            }
+        }
+        return sum;
+    }
+    
+    
+var effectiveStats = new Array();
+    effectiveStats.push(["Effective Stat", "Value", "Modifier","Half-Modifier"]);
+
 function calcStats(){
+    effectiveStats.length = 1;
     calcSpeed();
     calcPower();
     calcCharisma();
@@ -294,66 +390,69 @@ function calcStats(){
     calcSixthSense();
     dodgeCalc();
     calcCarryCap();
+    GenerateTable(effectiveStats,document.getElementById("dvTableEffStat"));
     return;
 }
 
 function calcSpeed() {
     var speed = document.getElementById("speedbase").value;
     speed = speedArmor(speed);
-    //apply debuffs or buffs
+    speed = parseInt(speed) + sumStatuses("Speed");
     //apply racials
-    document.getElementById("speed").innerHTML = speed;
-    return;
+    effectiveStats.push(["Speed",speed,speed/10,speed/20]);
+    return speed;
 }
 
 function calcPower() {
     var power = document.getElementById("powerbase").value;
-    //apply debuffs or buffs
+    power = parseInt(power) + sumStatuses("Power");
     //apply racials
-    document.getElementById("power").innerHTML = power;
+    effectiveStats.push(["Power",power,power/10,power/20]);
     return;
 }
 
 function calcCharisma() {
     var charisma = document.getElementById("charismabase").value;
-    //apply debuffs or buffs
+    charisma = parseInt(charisma) + sumStatuses("Charisma");
     //apply racials
-    document.getElementById("charisma").innerHTML = charisma;
+    effectiveStats.push(["Charisma",charisma,charisma/10,charisma/20]);
     return;
 }
 
 function calcIntelligence() {
     var intelligence = document.getElementById("intelligencebase").value;
-    //apply debuffs or buffs
+    intelligence = parseInt(intelligence) + sumStatuses("Intelligence");
     //apply racials
-    document.getElementById("intelligence").innerHTML = intelligence;
+    effectiveStats.push(["Intelligence",intelligence,intelligence/10,intelligence/20]);
     return;
 }
 
 function calcEndurance() {
     var endurance = document.getElementById("endurancebase").value;
-    //apply debuffs or buffs
+    endurance = parseInt(endurance) + sumStatuses("Endurance");
     //apply racials
-    document.getElementById("endurance").innerHTML = endurance;
+    effectiveStats.push(["Endurance",endurance, endurance/10,endurance/20]);
     return;
 }
 
 function calcSixthSense() {
     var sixth = document.getElementById("sixbase").value;
-    //apply debuffs or buffs
+    sixth = parseInt(sixth) + sumStatuses("6thSense");
     //apply racials
-    document.getElementById("sixth").innerHTML = sixth;
+    effectiveStats.push(["6th Sense",sixth,sixth/10,sixth/20]);
     return;
 }
 
 function calcCarryCap() {
-    var power = parseFloat(document.getElementById("power").innerHTML);
-    var endurance = parseFloat(document.getElementById("endurance").innerHTML);
+    var power = parseInt(effectiveStats[2][1]);
+    var endurance = parseInt(effectiveStats[5][1]);
    
     var carCap= (20+power+endurance);
-	document.getElementById("carCap").innerHTML = carCap;
+	effectiveStats.push(["Carrying Capacity",carCap, "N/A", "N/A"]);
 	return;
 }
+
+
 
 function getCheckedRadioValue(name){
 	var armors = document.getElementsByName(name);
@@ -387,19 +486,19 @@ function speedArmor(speedin){
     }
     
 function dodgeCalc(){
-    var speed = document.getElementById("speed").innerHTML;
+    var speed = effectiveStats[1][1];
     var armorType = getCheckedRadioValue("armor");
     if ((armorType == "Medium") || (armorType == "Heavy")){
         if (!checkShield()) {speed -= 5;}
     }
-	document.getElementById("dodge").innerHTML =10+(speed/10);
+	effectiveStats.push(["Dodge Stat", 10+(speed/10), "N/A","N/A"]);
 	return;
 }
 
 function getHealth(){
-	document.getElementById("health").innerHTML=document.getElementById("endurance").innerHTML;}
+	document.getElementById("health").innerHTML= effectiveStats[5][1];}
 function getMP(){
-	document.getElementById("mp").innerHTML=document.getElementById("intelligence").innerHTML;}
+	document.getElementById("mp").innerHTML= effectiveStats[4][1];}
 function setHealth(num){
 	document.getElementById("health").innerHTML-=num;}
 function setMP(num){
@@ -409,7 +508,7 @@ function setMP(num){
 <br>
 
 <br>
-
+<div class="left">
 <p><b>HEALTH</b>:
 <object id="health"></object></p>
 <button onclick="getHealth()">Reset Health</button>
@@ -431,15 +530,6 @@ function setMP(num){
 </form>
 <button onclick = "setMP(-document.getElementById('mpMod').value);document.getElementById('mpMod').value = ''">+MP</button>
 <button onclick = "setMP(document.getElementById('mpMod').value);document.getElementById('mpMod').value = ''">-MP</button>
-
-<div>
-<br>
-<br>
-<p><b>CARRYING CAPACITY:</b>
-<object id="carCap"></object></p>
-<p><b>DODGE STAT:</b>
-<object id="dodge">
-</object></p>
 </div>
 <p>ARMOR</p>
 <form>
