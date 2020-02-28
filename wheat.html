@@ -78,9 +78,10 @@ body {
 <p>Some things, like running a short distance, drawing an arrow from a quiver, or letting out a battle cry don't use a full action. This is why turns are <b>approximately</b> one action long - they're usually one action and some change.</p>
 <p>There is no fixed turn duration, rather, a turn's duration changes based on the pacing of the scene. A turn during combat might be 6 seconds or less, whereas a turn in a stealth or travel scene may be anywhere from 5 minutes to an hour.</p>
 <p>Characters including players take their turns in descending order of their Speed, but players with higher speed can choose to delay their turns until later in the initiative stack. For example, a nimble thief may want to use his turn to react to something a slower character does, such as interrupting a spellcaster.</p>
+<p><b>To take an action that checks only a core stat,</b> roll 1d20 + (Stat/10). In general, 10% of a core stat is called its <b>modifier</b>. Some actions, like resisting poison, prying open a door, or running away, use only a corresponding core stat rather than a skill. In these instances, you use that stat's modifier.</p>
 <p><b>To take an action you have a skill related to,</b> roll 1d20 + (Skill/10). For instance, a thief picking a lock with a lockpicking skill of 54% would roll 1d20 and add 5.4 to the result.</p>
 <p>If you have 2 or more skills that affect the same thing (e.g. battleaxes and two-handed weapons) the higher skill is the one applied.</p>
-<p><b>When attempting an action without a corresponding skill,</b> instead use its corresponding core stat divided by 20.</p>
+<p><b>When attempting an action without a corresponding skill,</b> instead use its corresponding core stat divided by 20 (called its <b>half-modifier</b>).</p>
 <p>This table outlines the basic spectrum of checks</p>
 <table>
 <thead>
@@ -244,7 +245,7 @@ body {
 <div class = "center">
 <div id="dvTableEffStat"></div>
 
-
+<p><b>Debuff Applicator</b></p>
 <input type="text" id="input1" placeholder="Debuff Source">
 <select id="input2">
     <option value="Speed">Speed</option>
